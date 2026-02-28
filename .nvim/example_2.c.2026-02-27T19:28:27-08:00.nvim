@@ -16,9 +16,10 @@
     if (!(expr)) {                                                             \
       fprintf(stderr, "Test failed: %s\n", #expr);                             \
       exit(1);                                                                 \
-    } else {                                                                   \
-      printf("test pass: %s\n", #expr);                                        \
     }                                                                          \
+    else{ \
+      printf("test pass: %s\n", #expr);                                        \
+    } \
   }
 
 typedef struct node {

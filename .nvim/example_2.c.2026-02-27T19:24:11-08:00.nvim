@@ -16,8 +16,6 @@
     if (!(expr)) {                                                             \
       fprintf(stderr, "Test failed: %s\n", #expr);                             \
       exit(1);                                                                 \
-    } else {                                                                   \
-      printf("test pass: %s\n", #expr);                                        \
     }                                                                          \
   }
 
@@ -67,8 +65,7 @@ void insert_sorted(uint64_t data) {
     }
 
     ASSERT(prev != NULL);
-    if (curr != NULL)
-      ASSERT(data < curr->data);
+    if (curr != NULL) ASSERT(data < curr->data);
 
     prev->next = new_node;
     if (curr != NULL) {

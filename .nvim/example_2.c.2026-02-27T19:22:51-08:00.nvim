@@ -6,7 +6,6 @@
   {                                                                            \
     if (!(expr)) {                                                             \
       fprintf(stderr, "Assertion failed: %s\n", #expr);                        \
-      fprintf(stderr, "  at %s:%d\n", __FILE__, __LINE__);                     \
       exit(1);                                                                 \
     }                                                                          \
   }
@@ -16,8 +15,6 @@
     if (!(expr)) {                                                             \
       fprintf(stderr, "Test failed: %s\n", #expr);                             \
       exit(1);                                                                 \
-    } else {                                                                   \
-      printf("test pass: %s\n", #expr);                                        \
     }                                                                          \
   }
 
@@ -33,18 +30,27 @@ typedef struct info {
 node_t *head = NULL;
 info_t info = {0};
 
-uint64_t list_sum(void) {
+uint64_t list_sum(void){
   uint64_t s = 0;
   node_t *curr = head;
-  while (curr != NULL) {
+  while(curr != NULL){
     s += curr->data;
     curr = curr->next;
   }
   return s;
 }
 
+void assert_sorted(void){
+  node_t *curr = head;
+  while(curr != NULL && curr->next != NULL){
+    ASSERT(curr->data <= curr->next->data);
+    curr = curr->next;
+  }
+}
+
 void insert_sorted(uint64_t data) {
   node_t *new_node = malloc(sizeof(node_t));
+  ASSERT(new_node != NULL);
   new_node->data = data;
   new_node->next = NULL;
 
@@ -67,16 +73,17 @@ void insert_sorted(uint64_t data) {
     }
 
     ASSERT(prev != NULL);
-    if (curr != NULL)
-      ASSERT(data < curr->data);
+    ASSERT(prev->data <= data);
+    if(curr!=NULL) ASSERT (data < curr->data);
 
     prev->next = new_node;
-    if (curr != NULL) {
-      new_node->next = curr;
-    }
+      new_node->next = curr->next;
   }
 
   info.sum += data;
+
+  assert_sorted();
+  ASSERT(info.sum == list_sum());
 }
 
 int index_of(uint64_t data) {
