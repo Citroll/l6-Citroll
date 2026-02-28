@@ -1,0 +1,4 @@
+/home/cmpt201/units/05-labs/l6-Citroll/build/CMakeFiles/example1.dir
+/home/cmpt201/units/05-labs/l6-Citroll/build/CMakeFiles/example2.dir
+/home/cmpt201/units/05-labs/l6-Citroll/build/CMakeFiles/edit_cache.dir
+/home/cmpt201/units/05-labs/l6-Citroll/build/CMakeFiles/rebuild_cache.dir
